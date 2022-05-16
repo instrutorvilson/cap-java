@@ -1,11 +1,33 @@
 import entidades.Calculadora;
 import entidades.Pessoa;
+import heranca.Motocicleta;
+import heranca.Veiculo;
 
 public class Poo {
 
 	public static void main(String[] args) {
       // criarObjetoPessoa();
-		criarObjetoCalculadora();
+	  //criarObjetoCalculadora();
+	  //criaObjetoVeiculo();	
+		criaObjetoMotocicleta();
+	}
+	
+	public static void criaObjetoMotocicleta() {
+	   Motocicleta	m1 = new Motocicleta();
+	   m1.setCilindradas(190);
+	   m1.setMarca("Honda");
+	   m1.setModelo("xre");
+	   m1.setPlaca("LZE-8741");
+	   //System.out.println(m1.toString());
+	   m1.imprimirDados();
+	   
+	   Motocicleta m2 = new Motocicleta("Honda","ML","abc-1234",125);
+	   System.out.println(m2.toString());
+	}
+	
+	public static void criaObjetoVeiculo() {
+		Veiculo v1 = new Veiculo("Chevrolet", "Corsa", "lzz-3456");
+		System.out.println(v1.toString());
 	}
 	
 	public static void criarObjetoCalculadora() {
@@ -17,9 +39,7 @@ public class Poo {
 		
 		System.out.println(c1.soma());
 		System.out.println(c1.soma(300, 281));
-		System.out.println(c1.soma(array1));
-		
-	
+		System.out.println(c1.soma(array1));	
 	}
 	
 	public static void criarObjetoPessoa() {
