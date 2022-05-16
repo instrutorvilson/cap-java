@@ -1,8 +1,28 @@
+import entidades.Calculadora;
 import entidades.Pessoa;
 
 public class Poo {
 
 	public static void main(String[] args) {
+      // criarObjetoPessoa();
+		criarObjetoCalculadora();
+	}
+	
+	public static void criarObjetoCalculadora() {
+		Calculadora c1 = new Calculadora();
+		c1.x = 1000;
+		c1.y = 20;
+	   
+		int[] array1 = {10,20,30,40};
+		
+		System.out.println(c1.soma());
+		System.out.println(c1.soma(300, 281));
+		System.out.println(c1.soma(array1));
+		
+	
+	}
+	
+	public static void criarObjetoPessoa() {
 		Pessoa obj = new Pessoa();
 		/*obj.nome = "maria";
 		obj.email = "maria@gmail.com";
