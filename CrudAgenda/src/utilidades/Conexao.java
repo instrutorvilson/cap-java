@@ -5,9 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-
-	public static Connection conectar() {
-		Connection con = null;
+	static Connection con = null;
+	public static Connection conectar() {		
 		//           "jdbc:postgresql://host:port/database"
 		String url = "jdbc:postgresql://ec2-44-196-223-128.compute-1.amazonaws.com:5432/d6o3obgspnp4ar";
 		String user = "djkuyzbwqzcclh";
@@ -18,5 +17,9 @@ public class Conexao {
 			e.printStackTrace();
 		}
 		return con;
+	}
+	
+	public static void closeConexao() {
+		con = null;
 	}
 }

@@ -25,7 +25,10 @@ public class DaoContato implements IDAO<Contato>{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}	
+		finally {
+			Conexao.closeConexao();
+		}
 		return true;
 	}
 
@@ -48,7 +51,10 @@ public class DaoContato implements IDAO<Contato>{
 			
 		} catch (SQLException e) {
 		   e.printStackTrace();
-		}		
+		}	
+		finally {
+			Conexao.closeConexao();
+		}
 		return ct;
 	}
 
@@ -68,7 +74,10 @@ public class DaoContato implements IDAO<Contato>{
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}				
+		}
+		finally {
+			Conexao.closeConexao();
+		}
 		return lista;
 	}
 
