@@ -2,7 +2,7 @@ package tratamentoexcecao;
 
 import javax.swing.JOptionPane;
 
-import dao.DaoContato;
+
 import entidades.Contato;
 
 public class TratamentoExcecao {
@@ -10,8 +10,27 @@ public class TratamentoExcecao {
 	public static void main(String[] args) {
 		//tratandoExcecao();
         //usarFinaly();
+		try {
+			lancarExcecao();	
+		}
+		catch(ArithmeticException | NullPointerException e) {
+			System.out.println(e.toString());
+		}		
 	}
 
+	public static void lancarExcecao() throws ArithmeticException, NullPointerException {
+		float peso = 101;
+		if(peso < 100) {
+			throw new NullPointerException("Voçê ainda pode engordar 2 kilos");
+		}
+		int idade = 17;
+		if (idade < 18) {
+			throw new ArithmeticException("Voçê é menor de idade");
+		}
+		
+		
+	}
+	
 	public static void tratandoExcecao() {
 		Contato ct = new Contato();
 		int x = 10;
