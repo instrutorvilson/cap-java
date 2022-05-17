@@ -6,7 +6,19 @@ import entidades.Contato;
 public class Crud {
 
 	public static void main(String[] args) {
-	  	Contato ct = new Contato();
+	  	//chamaSalvar()
+		chamaBuscaPorId();
+	}
+	
+	public static void chamaBuscaPorId() {
+		Contato ct = new DaoContato().getOne(10);
+		if(ct != null) {
+			System.out.println(ct.toString());
+		}
+	}
+	
+	public static void chamaSalvar() {
+		Contato ct = new Contato();
 	  	ct.setNome("Maria");
 	  	ct.setEmail("maria@gmail.com");
 	  	

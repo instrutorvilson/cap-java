@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class DaoContato implements IDAO<Contato>{
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setString(1, obj.getNome());
 			stm.setString(2, obj.getEmail());
-			stm.execute();
+			stm.execute();    //aplicação -> database
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -29,8 +30,26 @@ public class DaoContato implements IDAO<Contato>{
 
 	@Override
 	public Contato getOne(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Contato ct = null;
+		
+		String sql = "select * from contato where id = ?";
+		Connection con = Conexao.conectar();
+		try {
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setInt(1, id); 
+			ResultSet rs = stm.executeQuery(); //database -> aplicação
+			if(rs.next()) {
+				ct = new Contato();
+				ct.setId(rs.getInt("id"));
+				ct.setNome(rs.getString("nome"));
+				ct.setEmail(rs.getString("email"));
+			}
+			
+		} catch (SQLException e) {
+		   e.printStackTrace();
+		}
+		
+		return ct;
 	}
 
 	@Override
