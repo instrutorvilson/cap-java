@@ -1,5 +1,7 @@
 package crud;
 
+import java.util.List;
+
 import dao.DaoContato;
 import entidades.Contato;
 
@@ -7,7 +9,14 @@ public class Crud {
 
 	public static void main(String[] args) {
 	  	//chamaSalvar()
-		chamaBuscaPorId();
+		//chamaBuscaPorId();
+		chamarPegarTodos();
+	}
+	public static void chamarPegarTodos() {
+		List<Contato> lista = new DaoContato().getTodos();
+		for(Contato ct : lista) {
+			System.out.println(ct.toString());
+		}
 	}
 	
 	public static void chamaBuscaPorId() {

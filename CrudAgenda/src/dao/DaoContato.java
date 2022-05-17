@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import entidades.Contato;
@@ -47,15 +48,28 @@ public class DaoContato implements IDAO<Contato>{
 			
 		} catch (SQLException e) {
 		   e.printStackTrace();
-		}
-		
+		}		
 		return ct;
 	}
 
 	@Override
 	public List<Contato> getTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Contato> lista = new  ArrayList<Contato>();
+		Connection con = Conexao.conectar();
+		try {
+			PreparedStatement stm = con.prepareStatement("select * from contato");
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()) {
+				Contato ct = new Contato();
+				ct.setId(rs.getInt("id"));
+				ct.setNome(rs.getString("nome"));
+				ct.setEmail(rs.getString("email"));
+				lista.add(ct);
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}				
+		return lista;
 	}
 
 	@Override
