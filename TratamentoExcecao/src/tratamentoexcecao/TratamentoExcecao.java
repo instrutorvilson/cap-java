@@ -4,20 +4,35 @@ import javax.swing.JOptionPane;
 
 
 import entidades.Contato;
+import exceptions.MinhaExcecao;
 
 public class TratamentoExcecao {
 
 	public static void main(String[] args) {
 		//tratandoExcecao();
         //usarFinaly();
-		try {
+		/*try {
 			lancarExcecao();	
 		}
 		catch(ArithmeticException | NullPointerException e) {
 			System.out.println(e.toString());
-		}		
+		}*/
+		try {
+		usandoExcecaoPersonalizada();
+		}
+		catch (MinhaExcecao e) {
+			System.out.println(e.toString());
+		}
 	}
 
+	public static void usandoExcecaoPersonalizada() throws MinhaExcecao{
+	    int x = 10;
+	    if(x > 5) {
+	    	throw new MinhaExcecao(x + " é maior que 5");
+	    }
+	}
+	
+	
 	public static void lancarExcecao() throws ArithmeticException, NullPointerException {
 		float peso = 101;
 		if(peso < 100) {
