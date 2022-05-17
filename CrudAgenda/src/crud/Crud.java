@@ -10,8 +10,16 @@ public class Crud {
 	public static void main(String[] args) {
 	  	//chamaSalvar()
 		//chamaBuscaPorId();
-		chamarPegarTodos();
+		//chamarPegarTodos();
+		chamarDelete();
 	}
+	
+	public static void chamarDelete() {
+		if(new DaoContato().deletar(10)) {
+			System.out.println("Registro excluido com sucesso");
+		}
+	}
+	
 	public static void chamarPegarTodos() {
 		List<Contato> lista = new DaoContato().getTodos();
 		for(Contato ct : lista) {

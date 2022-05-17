@@ -89,8 +89,18 @@ public class DaoContato implements IDAO<Contato>{
 
 	@Override
 	public boolean deletar(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection con = Conexao.conectar();
+		try {
+			PreparedStatement stm = con.prepareStatement("delete from contato where id = ?");
+			stm.setInt(1, id);
+			stm.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			Conexao.closeConexao();
+		}
+		return true;
 	}
 	
 }
