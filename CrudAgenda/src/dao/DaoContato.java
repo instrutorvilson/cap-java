@@ -83,8 +83,24 @@ public class DaoContato implements IDAO<Contato>{
 
 	@Override
 	public boolean alterar(Contato obj) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = "update contato set nome = ?, email = ? where id = ?";
+		Connection con = Conexao.conectar();
+		try {
+			PreparedStatement stm = con.prepareStatement(sql);
+			
+			stm.setString(1, obj.getNome());
+			stm.setString(2, obj.getEmail());
+			stm.setInt(3, obj.getId());
+			
+			stm.execute();    //aplicação -> database
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		finally {
+			Conexao.closeConexao();
+		}
+		return true;
 	}
 
 	@Override

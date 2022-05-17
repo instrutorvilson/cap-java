@@ -11,7 +11,28 @@ public class Crud {
 	  	//chamaSalvar()
 		//chamaBuscaPorId();
 		//chamarPegarTodos();
-		chamarDelete();
+		//chamarDelete();
+		chamarUpdate();
+	}
+	
+	public static void chamarUpdate() {
+		Contato ct = new DaoContato().getOne(5);
+		if(ct != null) {
+			System.out.println(ct.toString());
+		}
+		
+		ct.setNome("Maria da Silva");
+		ct.setEmail("mariasilva@gmail.com");
+		
+		if(new DaoContato().alterar(ct)) {
+			System.out.println("Registro alterado com sucesso");
+		}
+		
+		Contato ct2 = new DaoContato().getOne(5);
+		if(ct2 != null) {
+			System.out.println(ct2.toString());
+		}		
+		
 	}
 	
 	public static void chamarDelete() {
@@ -27,8 +48,8 @@ public class Crud {
 		}
 	}
 	
-	public static void chamaBuscaPorId() {
-		Contato ct = new DaoContato().getOne(10);
+	public static void chamaBuscaPorId(int id) {
+		Contato ct = new DaoContato().getOne(id);
 		if(ct != null) {
 			System.out.println(ct.toString());
 		}
