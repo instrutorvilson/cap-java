@@ -14,6 +14,7 @@
                   <th>Id</th>
                   <th>Nome</th>
                   <th>Email</th>
+                  <th>Ações</th>
                </tr>
            </thead>   
            <tbody>
@@ -21,6 +22,7 @@
                  <td th:text="*{contato.id}" />
                  <td th:text="*{contato.nome}" />
                  <td th:text="*{contato.email}" />
+                 <td> <a th:href="@{'/contato/consulta/'+${contato.id}}">Editar</a></td>
                </tr>
            </tbody>
         </table>     
