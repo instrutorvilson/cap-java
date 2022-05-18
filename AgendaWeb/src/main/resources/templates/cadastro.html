@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Agenda web</title>
+    </head>
+
+    <body>
+        <h1>Cadastro de contatos</h1>  
+        <form th:action="@{/cadastro}" th:object="${contato}" method="post">
+            <label>Id</label>
+            <input type="text" th:field="*{id}" placeholder="Informe Id" />
+            <label>Nome</label>
+            <input type="text" th:field="*{nome}" placeholder="Informe nome" />
+            <label>Nome</label>
+            <input type="text" th:field="*{email}" placeholder="Informe email" />
+            <button type="submit">Gravar</button>
+        </form>     
+    </body>
+</html>
