@@ -14,7 +14,8 @@
                   <th>Id</th>
                   <th>Nome</th>
                   <th>Email</th>
-                  <th>Ações</th>
+                  <th>Editar</th>
+                  <th>Excluir</th>
                </tr>
            </thead>   
            <tbody>
@@ -23,6 +24,7 @@
                  <td th:text="*{contato.nome}" />
                  <td th:text="*{contato.email}" />
                  <td> <a th:href="@{'/contato/consulta/'+${contato.id}}">Editar</a></td>
+                 <td> <a th:href="@{'/contato/excluir/'+${contato.id}}">Excluir</a></td>
                </tr>
            </tbody>
         </table>     

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +42,7 @@ public class ContatoController {
 		return "consulta";
 	} 
 		
+	/* passos para a edição*/
 	@GetMapping("/consulta/{idcontato}")
 	public String consultaContatoPorId(@PathVariable("idcontato") int idcontato, Model model) {
 		Contato contato = new DaoContato().getOne(idcontato);
@@ -56,5 +58,11 @@ public class ContatoController {
 			return "redirect:/contato/consulta";
 		}
 		return "editacontato";
+	}
+	
+	@GetMapping("/excluir/{idcontato}")
+	public String excluirContatp(@PathVariable("idcontato") int idcontato, Model model) {
+	    new DaoContato().deletar(idcontato);
+		return "redirect:/contato/consulta";
 	}
 }
