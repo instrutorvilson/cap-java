@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.aulas.mvc.dao.DaoContato;
 import com.aulas.mvc.entidades.Contato;
@@ -48,7 +49,8 @@ public class ContatoController {
 		return "editacontato";
 	}
 
-	@PutMapping("/alterar")
+	/*outra forma de mapear*/
+	@RequestMapping(value = "/alterar" , method = RequestMethod.POST)
 	public String alterarContato(@ModelAttribute Contato contato) {
 		if (new DaoContato().alterar(contato)) {
 			return "redirect:/contato/consulta";

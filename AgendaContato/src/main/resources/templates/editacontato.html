@@ -8,8 +8,8 @@
     </head>
 
     <body>
-        <h1>Cadastro de contatos</h1>  
-        <form th:action="@{/contato/cadastro}" th:object="${contato}" method="post">
+        <h1>Edição de contatos</h1>  
+        <form th:action="@{/contato/alterar}" th:object="${contato}" method="post">
             <label>Nome</label>
             <input type="text" th:field="*{id}"  readonly />
             <label>Nome</label>
