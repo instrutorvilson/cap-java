@@ -9,9 +9,7 @@
 
     <body>
         <h1>Cadastro de contatos</h1>  
-        <form th:action="@{/cadastro}" th:object="${contato}" method="post">
-            <label>Id</label>
-            <input type="text" th:field="*{id}" placeholder="Informe Id" />
+        <form th:action="@{/contato/cadastro}" th:object="${contato}" method="post">
             <label>Nome</label>
             <input type="text" th:field="*{nome}" placeholder="Informe nome" />
             <label>Nome</label>
