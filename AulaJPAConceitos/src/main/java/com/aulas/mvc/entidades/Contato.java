@@ -10,6 +10,7 @@ public class Contato {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	private String nome;
 	private String email;
 		
