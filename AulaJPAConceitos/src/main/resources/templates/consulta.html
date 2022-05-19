@@ -22,7 +22,10 @@
                  <td th:text="*{contato.id}" />
                  <td th:text="*{contato.nome}" />
                  <td th:text="*{contato.email}" />  
-                 <td> <a th:href="@{'/consulta/'+${contato.id}}">Editar</a></td>              
+                 <td> 
+                     <a th:href="@{'/consulta/'+${contato.id}}">Editar</a>
+                     <a th:href="@{'/excluir/'+${contato.id}}">Excluir</a>  
+                 </td>              
                </tr>
            </tbody>
         </table>     

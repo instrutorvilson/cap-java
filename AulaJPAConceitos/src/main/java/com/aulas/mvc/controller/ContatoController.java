@@ -50,4 +50,10 @@ public class ContatoController {
 		model.addAttribute("contato", ct);
 		return "editar";
 	}
+	
+	@GetMapping("/excluir/{idcontato}")
+	public String excluir(@PathVariable("idcontato") int id) {
+		repositoryContato.deleteById(id);
+		return "redirect:/consulta";
+	}
 }
