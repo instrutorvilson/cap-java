@@ -14,7 +14,6 @@ public class Contato {
 	private String email;
 		
 	public Contato() {
-	
 	}
 
 	public Contato(int id, String nome, String email) {

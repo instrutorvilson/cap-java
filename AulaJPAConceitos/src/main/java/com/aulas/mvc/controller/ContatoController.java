@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aulas.mvc.entidades.Contato;
@@ -18,6 +20,18 @@ public class ContatoController {
 	@GetMapping
 	public String index() {
 		return "index";
+	}
+	
+	@GetMapping("/cadastro")
+	public String formContato(Model model) {
+		model.addAttribute("contato", new Contato());
+		return "cadastro";
+	}
+	
+	@PostMapping("/cadastro")
+	public String inserir(@ModelAttribute Contato contato) {
+		repositoryContato.save(contato);
+		return "redirect:/consulta";
 	}
 	
 	@GetMapping("/consulta")
