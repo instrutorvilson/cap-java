@@ -1,0 +1,12 @@
+Categoria
+ -> id
+ -> descricao
+
+Produto
+-> id
+-> descricao
+-> preco
+-> estoque
+
+
+Criar modelo conceitual considerando que um produto pertence a somente uma categoria.

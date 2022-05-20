@@ -1,0 +1,29 @@
+modelos de banco de dados
+- modelo conceitual
+  -> visão de alto nivel dos dados
+
+- modelo lógico
+  -> definição de cardinalidade
+  -> chave primaria e chave estrangeira
+
+- modelo fisico
+ -> gera o script para implantação do modelo
+
+Chave primária
+-> um identificador unico do valor de uma linha em uma coluna na tabela.
+
+Chave estrangeria
+-> Configurada em uma coluna da tabela e o valor na linha, representa um registro(linha) na tabela e referência.
+-> sempre aponta para a chave primária na tabela referência.
+
+Formas normais:
+ -> primeira forma normal
+  - são atomicos
+
+ -> forma normal
+
+
+ -> terceira forma normal
+
+ - boyce codd
+
