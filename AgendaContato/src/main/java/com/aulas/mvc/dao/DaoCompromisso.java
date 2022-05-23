@@ -16,8 +16,21 @@ public class DaoCompromisso implements IDAO<Compromisso> {
 
 	@Override
 	public boolean salvar(Compromisso obj) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection con = Conexao.conectar();
+		String sql = "insert into compromisso (local, datahora, idcontato) values (?, ?, ?)";
+		try {
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setString(1, obj.getLocal());
+			stm.setDate(2, obj.getDatahora());
+			stm.setInt(3, obj.getContato().getId());
+			stm.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			Conexao.closeConexao();
+		}
+		return true;
 	}
 
 	@Override

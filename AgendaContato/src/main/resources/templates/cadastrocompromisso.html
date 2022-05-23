@@ -9,12 +9,12 @@
 
     <body>
         <h1>Cadastro de contatos</h1>  
-        <form th:action="@{/cadastrar}" th:object="${compromisso}" method="post">
-            <label>Nome</label>
-            <input type="datetime" th:field="*{datahora}" placeholder="Informe data e hora" />
-            <label>Nome</label>
+        <form th:action="@{/cadastrar}" th:object="${compromissoDTO}" method="post">
+            <label>Data hora</label>
+            <input type="text" th:field="*{datahora}" placeholder="Informe data e hora" />
+            <label>Local</label>
             <input type="text" th:field="*{local}" placeholder="Informe local" />
-            <select th:field="*{contato}">
+            <select th:field="*{idcontato}")>
                 <option th:each="contato : ${contatos}" 
                         th:value="${contato.id}" 
                         th:text="${contato.nome}"></option>
