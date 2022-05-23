@@ -1,23 +1,31 @@
 package com.aulas.mvc.entidades;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
+import java.sql.Time;
+
 
 public class Compromisso {
 	private int id;
-	private Date datahora;
+	private Date data;
+	private Time hora;
 	private String local;
 	private Contato contato; // agregação/composição
 
 	public Compromisso() {
 	}
-
-	public Compromisso(int id, Date datahora, String local, Contato contato) {
+	
+	
+	public Compromisso(int id, Date data, Time hora, String local, Contato contato) {
+		super();
 		this.id = id;
-		this.datahora = datahora;
+		this.data = data;
+		this.hora = hora;
 		this.local = local;
 		this.contato = contato;
 	}
+
+
+
 
 	public int getId() {
 		return id;
@@ -27,14 +35,7 @@ public class Compromisso {
 		this.id = id;
 	}
 
-	public Date getDatahora() {
-		return datahora;
-	}
-
-	public void setDatahora(Date datahora) {
-		this.datahora = datahora;
-	}
-
+	
 	public String getLocal() {
 		return local;
 	}
@@ -50,5 +51,27 @@ public class Compromisso {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
+
+
+	public Date getData() {
+		return data;
+	}
+
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	public Time getHora() {
+		return hora;
+	}
+
+
+	public void setHora(Time hora) {
+		this.hora = hora;
+	}
+	
+	
 
 }

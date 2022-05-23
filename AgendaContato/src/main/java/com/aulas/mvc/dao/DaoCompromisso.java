@@ -17,12 +17,14 @@ public class DaoCompromisso implements IDAO<Compromisso> {
 	@Override
 	public boolean salvar(Compromisso obj) {
 		Connection con = Conexao.conectar();
-		String sql = "insert into compromisso (local, datahora, idcontato) values (?, ?, ?)";
+		String sql = "insert into compromisso (local, data, hora, idcontato) values (?, ?, ?, ?)";
 		try {
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setString(1, obj.getLocal());
-			stm.setDate(2, obj.getDatahora());
-			stm.setInt(3, obj.getContato().getId());
+			//stm.setString(2, obj.getDatahora());
+			stm.setDate(2, obj.getData());
+			stm.setTime(3, obj.getHora());
+			stm.setInt(4, obj.getContato().getId());
 			stm.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -44,7 +46,7 @@ public class DaoCompromisso implements IDAO<Compromisso> {
 		List<Compromisso> lista = new ArrayList<>();
 		Connection con = Conexao.conectar();
 		try {
-			String sql = "select comp.id as idcompromisso, comp.datahora, "
+			String sql = "select comp.id as idcompromisso, comp.data, comp.hora, "
 					+ " comp.local, ct.id as idcontato, ct.nome, ct.email "
 					+ " from compromisso comp, contato ct "
 					+ " where comp.idcontato = ct.id ";
@@ -55,7 +57,8 @@ public class DaoCompromisso implements IDAO<Compromisso> {
 						                 rs.getString("nome"),
 						                 rs.getString("email"));
 				lista.add(new Compromisso(rs.getInt("idcompromisso"),
-						                  rs.getDate("datahora"),
+						                  rs.getDate("data"),
+						                  rs.getTime("hora"),
 						                  rs.getString("local"),
 						                  ct));
 			}
@@ -85,7 +88,7 @@ public class DaoCompromisso implements IDAO<Compromisso> {
 		List<Compromisso> lista = new ArrayList<>();
 		Connection con = Conexao.conectar();
 		try {
-			String sql = "select comp.id as idcompromisso, comp.datahora, "
+			String sql = "select comp.id as idcompromisso, comp.data, comp.hora, "
 					+ " comp.local, ct.id as idcontato, ct.nome, ct.email "
 					+ " from compromisso comp, contato ct "
 					+ " where comp.idcontato = ct.id "
@@ -98,7 +101,8 @@ public class DaoCompromisso implements IDAO<Compromisso> {
 						                 rs.getString("nome"),
 						                 rs.getString("email"));
 				lista.add(new Compromisso(rs.getInt("idcompromisso"),
-						                  rs.getDate("datahora"),
+						                  rs.getDate("data"),
+						                  rs.getTime("hora"),
 						                  rs.getString("local"),
 						                  ct));
 			}

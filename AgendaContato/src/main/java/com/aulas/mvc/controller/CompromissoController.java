@@ -53,9 +53,12 @@ public class CompromissoController {
     @PostMapping("/cadastrar")
     public String cadastrar(@ModelAttribute CompromissoDTO compromissoDTO) {
         Contato ct = new DaoContato().getOne(compromissoDTO.getIdcontato());
-    	Compromisso compromisso = new Compromisso();
+    	
+        Compromisso compromisso = new Compromisso();
     	compromisso.setLocal(compromissoDTO.getLocal());
-    	compromisso.setDatahora(compromisso.getDatahora());
+      	compromisso.setData(compromissoDTO.getData());
+      	
+    	compromisso.setHora(compromissoDTO.getHora());
     	compromisso.setContato(ct);
     	
     	if(new DaoCompromisso().salvar(compromisso)) {

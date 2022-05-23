@@ -1,17 +1,28 @@
 package com.aulas.mvc.DTO;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class CompromissoDTO {
-	private String datahora;
+	private Date data;
+	private Time hora;
 	private String local;
 	private int idcontato;
 
-
-	public String getDatahora() {
-		return datahora;
+	public Date getData() {
+		return data;
 	}
 
-	public void setDatahora(String datahora) {
-		this.datahora = datahora;
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Time getHora() {
+		return hora;
+	}
+
+	public void setHora(Time hora) {
+		this.hora = hora;
 	}
 
 	public String getLocal() {
@@ -30,7 +41,7 @@ public class CompromissoDTO {
 		this.idcontato = idcontato;
 	}
 
-	public CompromissoDTO() {		
+	public CompromissoDTO() {
 	}
-	
+
 }
