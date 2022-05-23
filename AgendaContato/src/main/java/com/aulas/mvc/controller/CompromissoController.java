@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aulas.mvc.dao.DaoCompromisso;
 import com.aulas.mvc.entidades.Compromisso;
@@ -22,8 +25,16 @@ public class CompromissoController {
     public String consultar(Model model) {
     	List<Compromisso> lista = new DaoCompromisso().getTodos();
     	model.addAttribute("lista", lista);
-    	return "consultarcompromisso";
+      	return "consultarcompromisso";
     }
+    
+    @PostMapping("/consultartodos")
+    public String consultar(@RequestParam("criterio") String filtro, Model model) {
+    	List<Compromisso> lista = new DaoCompromisso().getFilter(filtro);
+    	model.addAttribute("lista", lista);
+      	return "consultarcompromisso";
+    }
+    
     
     @GetMapping("/cadastrar")
     public String formCadastro(Model model) {

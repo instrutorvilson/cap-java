@@ -8,8 +8,10 @@
     </head>
 
     <body>
-         <input type="text" placeholder="Informe parte do nome do contato" />
-         <button>Pesquisar</button>
+      <form th:action="@{/consultartodos}" method="post">
+         <input name="criterio" type="text" placeholder="Informe parte do nome do contato" />
+         <button type="submit">Pesquisar</button>
+      </form>   
          <hr />
         <table> 
            <thead>
