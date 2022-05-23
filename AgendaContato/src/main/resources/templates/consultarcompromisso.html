@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Agenda web</title>
+    </head>
+
+    <body>
+         <input type="text" placeholder="Informe parte do nome do contato" />
+         <button>Pesquisar</button>
+         <hr />
+        <table> 
+           <thead>
+               <tr>
+                  <th>Id</th>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Local</th>
+                  <th>Data hora</th>
+                  <th>Editar</th>
+                  <th>Excluir</th>
+               </tr>
+           </thead>   
+           <tbody>
+               <tr th:each="compromisso: ${lista}">
+                  <td th:text="*{compromisso.contato.id}" />
+                  <td th:text="*{compromisso.contato.nome}" />
+                  <td th:text="*{compromisso.contato.email}" />
+                  <td th:text="*{compromisso.local}" />
+                  <td th:text="*{compromisso.datahora}" />
+                  <td>Editar</td>
+                  <td>Editar</td>
+               </tr>
+           </tbody>
+        </table>     
+    </body>
+</html>

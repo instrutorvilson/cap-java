@@ -10,11 +10,11 @@
     <body>
         <h1>Edição de contatos</h1>  
         <form th:action="@{/contato/alterar}" th:object="${contato}" method="post">
-            <label>Nome</label>
+            <label>Id</label>
             <input type="text" th:field="*{id}"  readonly />
             <label>Nome</label>
             <input type="text" th:field="*{nome}" placeholder="Informe nome" />
-            <label>Nome</label>
+            <label>Email</label>
             <input type="text" th:field="*{email}" placeholder="Informe email" />
             <button type="submit">Gravar</button>
         </form>     

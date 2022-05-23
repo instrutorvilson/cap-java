@@ -61,7 +61,7 @@ public class ContatoController {
 	}
 	
 	@GetMapping("/excluir/{idcontato}")
-	public String excluirContatp(@PathVariable("idcontato") int idcontato, Model model) {
+	public String excluirContato(@PathVariable("idcontato") int idcontato, Model model) {
 	    new DaoContato().deletar(idcontato);
 		return "redirect:/contato/consulta";
 	}
