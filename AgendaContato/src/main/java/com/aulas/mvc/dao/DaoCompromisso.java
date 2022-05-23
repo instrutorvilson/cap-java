@@ -76,7 +76,7 @@ public class DaoCompromisso implements IDAO<Compromisso> {
 					+ " comp.local, ct.id as idcontato, ct.nome, ct.email "
 					+ " from compromisso comp, contato ct "
 					+ " where comp.idcontato = ct.id "
-			        + " and ct.nome like '"+filtro+"%'";
+			        + " and lower(ct.nome) like lower('"+filtro+"%')";
 			PreparedStatement stm = con.prepareStatement(sql);
 					
 			ResultSet rs = stm.executeQuery();
