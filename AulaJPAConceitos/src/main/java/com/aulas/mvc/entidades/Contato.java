@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Contato {
@@ -13,6 +14,9 @@ public class Contato {
 	
 	private String nome;
 	private String email;
+	
+	@OneToOne( mappedBy = "contato")	
+	private Compromisso compromisso;
 		
 	public Contato() {
 	}
