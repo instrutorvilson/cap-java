@@ -7,17 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "Tb_venda")
-public class Venda {
+@Table(name = "Tb_venda2")
+public class Venda2 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "dia_compra")
 	private Date data;
-
+	
+	@Transient
+	private Cliente2 cliente;
+	
 	public int getId() {
 		return id;
 	}
@@ -34,14 +40,22 @@ public class Venda {
 		this.data = data;
 	}
 
-	public Venda() {
-
+	public Venda2() {
 	}
 
-	public Venda(int id, Date data) {
+	public Venda2(int id, Date data) {
 		this.id = id;
 		this.data = data;
-
 	}
+
+	public Cliente2 getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente2 cliente) {
+		this.cliente = cliente;
+	}
+
+	
 
 }
