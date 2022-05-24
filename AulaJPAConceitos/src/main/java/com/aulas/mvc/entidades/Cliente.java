@@ -3,6 +3,7 @@ package com.aulas.mvc.entidades;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,10 +18,13 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(length = 30)
 	private String nome;
+	@Column(length =  50)
 	private String email;
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cliente_id")
 	private List<Venda> vendas;
 
 	public int getId() {

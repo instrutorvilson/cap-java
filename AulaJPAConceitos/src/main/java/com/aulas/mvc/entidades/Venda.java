@@ -2,6 +2,7 @@ package com.aulas.mvc.entidades;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,9 +17,8 @@ public class Venda {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(name = "dia_compra")
 	private Date data;
-	@ManyToOne	
-	private Cliente cliente;
 
 	public int getId() {
 		return id;
@@ -36,22 +36,14 @@ public class Venda {
 		this.data = data;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
 	public Venda() {
 
 	}
 
-	public Venda(int id, Date data, Cliente cliente) {
+	public Venda(int id, Date data) {
 		this.id = id;
 		this.data = data;
-		this.cliente = cliente;
+
 	}
 
 }

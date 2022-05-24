@@ -13,14 +13,15 @@ insert into tb_cliente(nome, email)values('maria','maria@gmail.com');
 insert into tb_cliente(nome, email)values('jose','jose@gmail.com');
 insert into tb_cliente(nome, email)values('Antonia','antonia@gmail.com');
 
+insert into tb_venda(dia_compra, cliente_id)values('2022-05-24',1);
+insert into tb_venda(dia_compra, cliente_id)values('2022-04-24',1);
+insert into tb_venda(dia_compra, cliente_id)values('2022-04-01',1); 
 
-insert into tb_venda(data, cliente_id)values('2022-05-24',1);
-insert into tb_venda(data, cliente_id)values('2022-04-24',1);
-insert into tb_venda(data, cliente_id)values('2022-04-01',1);
+insert into tb_venda(dia_compra, cliente_id)values('2022-05-12',2);
+insert into tb_venda(dia_compra, cliente_id)values('2022-03-24',2);
+insert into tb_venda(dia_compra, cliente_id)values('2022-02-24',2);
 
-insert into tb_venda(data, cliente_id)values('2022-05-12',2);
-insert into tb_venda(data, cliente_id)values('2022-03-24',2);
-insert into tb_venda(data, cliente_id)values('2022-02-24',2);
+insert into tb_venda(dia_compra, cliente_id)values('2022-03-24',3);
+insert into tb_venda(dia_compra, cliente_id)values('2022-02-24',3);
 
-insert into tb_venda(data, cliente_id)values('2022-03-24',3);
-insert into tb_venda(data, cliente_id)values('2022-02-24',3);
+
