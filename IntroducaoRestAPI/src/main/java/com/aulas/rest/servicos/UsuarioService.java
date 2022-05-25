@@ -46,4 +46,8 @@ public class UsuarioService {
 		user = repo.save(user);
 		return new UsuarioDTO(user);
 	}
+	
+	public void excluir(int idusuario) {
+		repo.deleteById(idusuario);
+	}
 }
