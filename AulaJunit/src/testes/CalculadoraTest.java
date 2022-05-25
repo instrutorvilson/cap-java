@@ -1,14 +1,21 @@
 package testes;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import entidades.Calculadora;
 
 public class CalculadoraTest {
+	Calculadora calculadora; 
+	
+	@BeforeEach 
+	 public void setup() {
+		calculadora = new Calculadora(); 
+     }
+	
 	@Test
-	public void resultadoOkQuandoDiminuirDoisNumeros() {
-		Calculadora calculadora = new Calculadora();
+	public void resultadoOkQuandoDiminuirDoisNumeros() {		
 		double n1 = 50;
 		double n2 = 100;
 		
@@ -19,7 +26,6 @@ public class CalculadoraTest {
 	
 	@Test
 	public void resultadoOkQuandoMultiplicarDoisNumeros() {
-		Calculadora calculadora = new Calculadora();
 		double valor = 100.0;
 		double multiplicador = 2.0;
 		
@@ -31,10 +37,6 @@ public class CalculadoraTest {
 	
 	@Test
 	public void resultaDeveSerDezQuandoSomarCincoComCinco() {
-		// Arrange
-		Calculadora calculadora = new Calculadora();
-
-		// Act
 		double resultado = calculadora.somar(5.0, 5.0);
 		double valorEsperado = 10.0;
 
@@ -44,8 +46,6 @@ public class CalculadoraTest {
 
 	@Test
 	public void resultadoDivisaoOkQuandoDivisorDiferenteZero() throws Exception {
-		// Arrange
-		Calculadora calculadora = new Calculadora();
 		double divisor = 10.0;
 		double dividendo = 20.0;
 
@@ -58,9 +58,6 @@ public class CalculadoraTest {
 	
     @Test
 	public void divisaoLancaExcecaoQuandoDivisorZero() {
-
-		// Arrange   100/0
-		Calculadora calculadora = new Calculadora();
 		double divisor = 0.0;
 		double dividendo = 10.0;
 
