@@ -1,6 +1,7 @@
 package com.aulas.rest.controles;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,11 @@ public class ContatoController {
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/{nome}")
-	public String ola(@PathVariable("nome") String nome) {
-		return "ola " + nome;
+	@GetMapping("/{idcontato}")
+	public ResponseEntity<Contato> pegaUmContato(@PathVariable("idcontato") int idcontato) {
+		Optional<Contato> ct = repo.findById(idcontato);
+		
+		return ResponseEntity.ok(ct.get());
 	}
 	
 	@PostMapping
