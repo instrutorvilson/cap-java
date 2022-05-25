@@ -1,5 +1,7 @@
 package com.aulas.rest.controles;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +22,9 @@ public class ContatoController {
 	ContatoRepositorio repo;
 	
 	@GetMapping
-	public ResponseEntity<String> ola() {
-		return ResponseEntity.ok("ola mundo");
+	public ResponseEntity<List<Contato>> pegaContatos() {
+		List<Contato> lista = repo.findAll();
+		return ResponseEntity.ok(lista);
 	}
 	
 	@GetMapping("/{nome}")
