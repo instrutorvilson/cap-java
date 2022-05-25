@@ -2,6 +2,7 @@ package com.aulas.rest.servicos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,21 @@ public class UsuarioService {
 	
 	public UsuarioDTO salvar(Usuario usuario) {
 		Usuario user = repo.save(usuario);
+		return new UsuarioDTO(user);
+	}
+	
+	public UsuarioDTO pegarUsuario(int idusuario) {
+	  Usuario user = repo.findById(idusuario).get();
+	  return new UsuarioDTO(user);
+	}
+	
+	public UsuarioDTO alterar(int idusuario, Usuario usuario) {
+		Usuario user = repo.findById(idusuario).get();
+		user.setNome(usuario.getNome());
+		user.setEmail(usuario.getEmail());
+		user.setSenha(usuario.getSenha());
+		user.setPerfil(usuario.getPerfil());
+		user = repo.save(user);
 		return new UsuarioDTO(user);
 	}
 }
