@@ -16,12 +16,18 @@ public class UsuarioService {
    UsuarioRepositorio repo;
 	
 	public List<UsuarioDTO> listarTodos(){
-		List<UsuarioDTO> usuariosDTO = new ArrayList<>();
-		
 		List<Usuario> usuarios = repo.findAll();
+		
+		List<UsuarioDTO> usuariosDTO = new ArrayList<>();		
+		
 		for(Usuario user : usuarios) {
 			usuariosDTO.add(new UsuarioDTO(user));
 		}		
 		return usuariosDTO;
+	}
+	
+	public UsuarioDTO salvar(Usuario usuario) {
+		Usuario user = repo.save(usuario);
+		return new UsuarioDTO(user);
 	}
 }
