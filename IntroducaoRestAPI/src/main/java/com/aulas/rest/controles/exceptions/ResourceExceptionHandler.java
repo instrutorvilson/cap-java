@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.aulas.rest.servicos.excecoes.RecursoNaoEncontrado;
 
-//@ControllerAdvice
+@ControllerAdvice
 public class ResourceExceptionHandler {
 
-	//@ExceptionHandler(RecursoNaoEncontrado.class)
+	@ExceptionHandler(RecursoNaoEncontrado.class)
 	public ResponseEntity<StandardError> entidadeNaoEncontrada(RecursoNaoEncontrado e, HttpServletRequest req){
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
@@ -24,4 +24,6 @@ public class ResourceExceptionHandler {
 		err.setPath(req.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
+	
+	
 }

@@ -43,11 +43,7 @@ public class UsuarioController {
 
 	@PutMapping("/{idusuario}")
 	public ResponseEntity<UsuarioDTO> alterar(@PathVariable("idusuario") int idusuario, @RequestBody Usuario usuario) {
-		try {
-			return ResponseEntity.status(HttpStatus.OK).body(service.alterar(idusuario, usuario));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
+		return ResponseEntity.status(HttpStatus.OK).body(service.alterar(idusuario, usuario));
 	}
 
 	@DeleteMapping("/{idusuario}")

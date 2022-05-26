@@ -35,12 +35,14 @@ public class UsuarioService {
 	
 	public UsuarioDTO pegarUsuario(int idusuario) {
 	  Optional<Usuario> obj = repo.findById(idusuario);	
-	  Usuario user = obj.orElseThrow(() -> new RecursoNaoEncontrado("Usuário não encontrado"));
+	  Usuario user = obj.orElseThrow(() -> new RecursoNaoEncontrado("Usuário não encontrado."));
 	  return new UsuarioDTO(user);
 	}
 	
 	public UsuarioDTO alterar(int idusuario, Usuario usuario) {
-		Usuario user = repo.findById(idusuario).get();
+		Optional<Usuario > obj = repo.findById(idusuario);
+		Usuario user = obj.orElseThrow(() -> new RecursoNaoEncontrado("Usuário não encontrado."));
+	
 		user.setNome(usuario.getNome());
 		user.setEmail(usuario.getEmail());
 		user.setSenha(usuario.getSenha());
