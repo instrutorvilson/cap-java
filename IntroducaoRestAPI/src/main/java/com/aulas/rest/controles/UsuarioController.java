@@ -31,12 +31,8 @@ public class UsuarioController {
 
 	@GetMapping("/{idusuario}")
 	public ResponseEntity<UsuarioDTO> pegarUsuario(@PathVariable("idusuario") int idusuario) {
-		try {
-			UsuarioDTO userDTO = service.pegarUsuario(idusuario);
-			return ResponseEntity.status(HttpStatus.OK).body(userDTO);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
+		UsuarioDTO userDTO = service.pegarUsuario(idusuario);
+		return ResponseEntity.status(HttpStatus.OK).body(userDTO);
 	}
 
 	@PostMapping
@@ -44,25 +40,23 @@ public class UsuarioController {
 		UsuarioDTO user = service.salvar(usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 	}
-	
+
 	@PutMapping("/{idusuario}")
-	public ResponseEntity<UsuarioDTO> alterar(@PathVariable("idusuario") int idusuario, @RequestBody Usuario usuario){
+	public ResponseEntity<UsuarioDTO> alterar(@PathVariable("idusuario") int idusuario, @RequestBody Usuario usuario) {
 		try {
-		  return ResponseEntity.status(HttpStatus.OK).body(service.alterar(idusuario, usuario));	
-		}
-		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.OK).body(service.alterar(idusuario, usuario));
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
-	
+
 	@DeleteMapping("/{idusuario}")
-	public ResponseEntity<UsuarioDTO> excluir(@PathVariable("idusuario") int idusuario){
+	public ResponseEntity<UsuarioDTO> excluir(@PathVariable("idusuario") int idusuario) {
 		try {
 			service.excluir(idusuario);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}		
+		}
 	}
 }

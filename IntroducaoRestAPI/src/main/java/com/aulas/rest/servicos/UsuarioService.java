@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.aulas.rest.dto.UsuarioDTO;
 import com.aulas.rest.entidades.Usuario;
 import com.aulas.rest.repositorios.UsuarioRepositorio;
+import com.aulas.rest.servicos.excecoes.RecursoNaoEncontrado;
 
 @Service
 public class UsuarioService {
@@ -33,7 +34,8 @@ public class UsuarioService {
 	}
 	
 	public UsuarioDTO pegarUsuario(int idusuario) {
-	  Usuario user = repo.findById(idusuario).get();
+	  Optional<Usuario> obj = repo.findById(idusuario);	
+	  Usuario user = obj.orElseThrow(() -> new RecursoNaoEncontrado("Usuário não encontrado"));
 	  return new UsuarioDTO(user);
 	}
 	
