@@ -19,13 +19,30 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private String perfil;
-	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant updatedAt;
+	private Instant updateAt;
+	
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
 
+	public Instant getUpdateAt() {
+		return updateAt;
+	}
+	
+	@PrePersist
+	public void prePersit() {
+		createdAt = Instant.now();
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		updateAt = Instant.now();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -69,24 +86,7 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public Instant getCreateAt() {
-		return createdAt;
-	}
-
-	public Instant getUpdateAt() {
-		return updatedAt;
-	}
 	
-	@PrePersist
-	public void prePersit() {
-		createdAt = Instant.now();
-	}
-	
-	@PreUpdate
-	public void preUpdate() {
-		updatedAt = Instant.now();
-	}
-
 	public Usuario(int id, String nome, String email, String senha, String perfil) {
 		this.id = id;
 		this.nome = nome;
