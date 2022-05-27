@@ -13,7 +13,7 @@ import javax.persistence.PreUpdate;
 @Entity
 public class Usuario {
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nome;
 	private String email;
@@ -21,28 +21,24 @@ public class Usuario {
 	private String perfil;
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
-	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updateAt;
-	
+
 	public Instant getCreatedAt() {
 		return createdAt;
 	}
-
 	public Instant getUpdateAt() {
 		return updateAt;
 	}
-	
 	@PrePersist
 	public void prePersit() {
 		createdAt = Instant.now();
 	}
-	
 	@PreUpdate
 	public void preUpdate() {
 		updateAt = Instant.now();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -86,7 +82,6 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	
 	public Usuario(int id, String nome, String email, String senha, String perfil) {
 		this.id = id;
 		this.nome = nome;
@@ -94,5 +89,5 @@ public class Usuario {
 		this.senha = senha;
 		this.perfil = perfil;
 	}
-	
+
 }
