@@ -12,7 +12,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String authorithy;
+	private String authority;
 
 	public Long getId() {
 		return id;
@@ -22,17 +22,17 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getAuthorithy() {
-		return authorithy;
+	public String getAuthority() {
+		return authority;
 	}
 
-	public void setAuthorithy(String authorithy) {
-		this.authorithy = authorithy;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
-	public Role(Long id, String authorithy) {
+	public Role(Long id, String authority) {
 		this.id = id;
-		this.authorithy = authorithy;
+		this.authority = authority;
 	}
 
 	public Role() {
