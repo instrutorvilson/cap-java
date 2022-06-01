@@ -33,8 +33,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	
 	private static final String[] OPERADOR_OR_ADMIN = { "/usuario/**" };
 	
-	private static final String[] ADMIN = { "/usuario/**" };
-	
+	private static final String[] ADMIN = { "/usuario/**" };	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 		resources.tokenStore(tokenStore);
