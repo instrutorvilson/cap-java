@@ -15,11 +15,13 @@ import com.aulas.rest.dtos.UsuarioDTO;
 import com.aulas.rest.entity.Usuario;
 import com.aulas.rest.services.UsuarioService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
     @Autowired
-	UsuarioService service; 
+	UsuarioService service;    
     
     @PostMapping
     public ResponseEntity<UsuarioDTO> salvar(@RequestBody Usuario usuario){
