@@ -18,18 +18,18 @@ import com.aulas.rest.services.UsuarioService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/")
 public class UsuarioController {
     @Autowired
 	UsuarioService service;    
     
-    @PostMapping
+    @PostMapping("/usuario")
     public ResponseEntity<UsuarioDTO> salvar(@RequestBody Usuario usuario){
     	UsuarioDTO usuarioDTO = service.salvar(usuario);
     	return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
     
-    @GetMapping
+    @GetMapping("/usuario")
     public ResponseEntity<List<UsuarioDTO>> listarTodos(){
     	return ResponseEntity.status(HttpStatus.OK).body(service.listarTodos());
     }
