@@ -1,5 +1,7 @@
 package com.aulas.rest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -8,7 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -25,6 +26,7 @@ public class ContatoServiceTest {
     private Long idInexistente;
     private Contato contato;
     private Contato contato2;
+    private List<Contato> lista;
     
 	@InjectMocks
 	private ContatoService service;
@@ -37,14 +39,17 @@ public class ContatoServiceTest {
 		idExistente = 1L;
 		idInexistente = 100L;
 		contato = new Contato();
+		lista = new ArrayList<>();
 		
 		
 		Mockito.doNothing().when(repository).deleteById(idExistente);
 		Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(idInexistente);
 		Mockito.when(repository.findById(idExistente)).thenReturn(Optional.of(contato));
+		Mockito.when(repository.findAll()).thenReturn(lista);
 		Mockito.doThrow(EntityNotFoundException.class).when(repository).findById(idInexistente);
 		Mockito.when(repository.save(contato)).thenReturn(contato);
 		Mockito.doThrow(IllegalArgumentException.class).when(repository).save(contato2);
+		//Mockito.doThrow(EntityNotFoundException.class).when(repository).save(contato3);
 	}
 	
 	@Test
@@ -83,8 +88,7 @@ public class ContatoServiceTest {
 	void retornaContatoQuandoSalvaComSucesso() {
 		Contato c = service.salvar(contato);
 		Assertions.assertEquals(c, contato);
-		Mockito.verify(repository).save(contato);
-		
+		Mockito.verify(repository).save(contato);		
 	}
 	
 	@Test
@@ -92,6 +96,28 @@ public class ContatoServiceTest {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			service.salvar(contato2);
 		});
+		Mockito.verify(repository).save(contato2);
+	}
+	
+	@Test
+	void retornaContatoQuandoAlteradoComSucesso() {
+		Contato c = service.alterar(idExistente, contato);
+		Assertions.assertEquals(c, contato);
+		Mockito.verify(repository).save(contato);
+	}
+	
+	@Test
+	void retornaNaoNulQuandoConsultaTodos() {
+		List<Contato> listaContato = service.pegarTodos();
+		Assertions.assertNotNull(listaContato);
+	}
+	
+	void lancaEntityNotFoundExceptionQuandoAlteraContatoComIdInexistente() {
+		//Assertions.assertThrows(EntityNotFoundException.class, () -> {
+			//service.alterar(idInexistente, contato);
+		//});
+		Contato c = service.alterar(idInexistente, contato2);
+		Assertions.assertNotEquals(c, contato2);
 		Mockito.verify(repository).save(contato2);
 	}
 }
