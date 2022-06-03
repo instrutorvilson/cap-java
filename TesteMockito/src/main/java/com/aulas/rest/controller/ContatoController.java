@@ -23,4 +23,6 @@ public class ContatoController {
 	public ResponseEntity<Contato> inserir(@RequestBody Contato contato){
 		return ResponseEntity.status(HttpStatus.OK).body(contato);
 	}
+	
+	
 }
