@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -23,6 +24,7 @@ public class ContatoServiceTest {
     private Long idExistente;
     private Long idInexistente;
     private Contato contato;
+    private Contato contato2;
     
 	@InjectMocks
 	private ContatoService service;
@@ -36,10 +38,13 @@ public class ContatoServiceTest {
 		idInexistente = 100L;
 		contato = new Contato();
 		
+		
 		Mockito.doNothing().when(repository).deleteById(idExistente);
 		Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(idInexistente);
 		Mockito.when(repository.findById(idExistente)).thenReturn(Optional.of(contato));
 		Mockito.doThrow(EntityNotFoundException.class).when(repository).findById(idInexistente);
+		Mockito.when(repository.save(contato)).thenReturn(contato);
+		Mockito.doThrow(IllegalArgumentException.class).when(repository).save(contato2);
 	}
 	
 	@Test
@@ -72,5 +77,21 @@ public class ContatoServiceTest {
 			service.pesquisar(idInexistente);
 		});
 		Mockito.verify(repository).findById(idInexistente);
+	}
+	
+	@Test
+	void retornaContatoQuandoSalvaComSucesso() {
+		Contato c = service.salvar(contato);
+		Assertions.assertEquals(c, contato);
+		Mockito.verify(repository).save(contato);
+		
+	}
+	
+	@Test
+	void lancaIIllegalArgumentExceptionQuandoFaltamDados() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			service.salvar(contato2);
+		});
+		Mockito.verify(repository).save(contato2);
 	}
 }
