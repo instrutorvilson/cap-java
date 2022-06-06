@@ -52,10 +52,10 @@ public class TestControllerContato {
 	}
 	
 	@Test
-	void deveLancarEntityNotFoundExceptionQuandoPesquisaIdInexistente() throws Exception {
+	void deveRertornarStatus404QuandoPesquisaIdInexistente() throws Exception {
 		ResultActions result =	mockMvc.perform(get("/contato/{idcontato}", idInexistente)
 			                           .accept(MediaType.APPLICATION_JSON));
 		
-		    result.andExpect(res -> assertTrue(res.getResolvedException() instanceof EntityNotFoundException));
+		    result.andExpect(status().isNotFound());
 	}
 }
