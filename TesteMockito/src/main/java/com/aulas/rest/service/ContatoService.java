@@ -50,10 +50,8 @@ public class ContatoService {
 	public Contato alterar(Long idcontato, Contato contato) {		
 		Optional<Contato> obj = repository.findById(idcontato);	
 		Contato ct = obj.orElseThrow(() -> new EntityNotFoundException("Contato inexistente"));
-    
-		ct = contato;		
-		return repository.save(contato);
-	}
-	
+    	ct = contato;		
+		return repository.save(ct);
+	}	
 	
 } 
