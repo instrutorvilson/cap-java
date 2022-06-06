@@ -33,23 +33,24 @@ public class ContatoServiceTest {
 	
 	@Mock
 	private ContatoRepository repository;
-	
+
 	@BeforeEach
 	void setup() {
 		idExistente = 1L;
 		idInexistente = 100L;
-		contato = new Contato();
+		contato = new Contato(1L,"Maria","maria@gmail.com");
 		lista = new ArrayList<>();
-		
-		
+			
 		Mockito.doNothing().when(repository).deleteById(idExistente);
 		Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(idInexistente);
 		Mockito.when(repository.findById(idExistente)).thenReturn(Optional.of(contato));
 		Mockito.when(repository.findAll()).thenReturn(lista);
+		
 		Mockito.doThrow(EntityNotFoundException.class).when(repository).findById(idInexistente);
 		Mockito.when(repository.save(contato)).thenReturn(contato);
+	
 		Mockito.doThrow(IllegalArgumentException.class).when(repository).save(contato2);
-		//Mockito.doThrow(EntityNotFoundException.class).when(repository).save(contato3);
+		//Mockito.doThrow(EntityNotFoundException.class).when(repository).save(contato2);
 	}
 	
 	@Test
@@ -100,24 +101,10 @@ public class ContatoServiceTest {
 	}
 	
 	@Test
-	void retornaContatoQuandoAlteradoComSucesso() {
-		Contato c = service.alterar(idExistente, contato);
-		Assertions.assertEquals(c, contato);
-		Mockito.verify(repository).save(contato);
-	}
-	
-	@Test
 	void retornaNaoNulQuandoConsultaTodos() {
 		List<Contato> listaContato = service.pegarTodos();
 		Assertions.assertNotNull(listaContato);
-	}
+	}		
 	
-	void lancaEntityNotFoundExceptionQuandoAlteraContatoComIdInexistente() {
-		//Assertions.assertThrows(EntityNotFoundException.class, () -> {
-			//service.alterar(idInexistente, contato);
-		//});
-		Contato c = service.alterar(idInexistente, contato2);
-		Assertions.assertNotEquals(c, contato2);
-		Mockito.verify(repository).save(contato2);
-	}
+	
 }
