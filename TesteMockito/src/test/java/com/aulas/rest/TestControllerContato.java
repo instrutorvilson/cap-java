@@ -1,7 +1,8 @@
 package com.aulas.rest;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.persistence.EntityNotFoundException;
@@ -19,6 +20,8 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.aulas.rest.entity.Contato;
 import com.aulas.rest.service.ContatoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,6 +30,7 @@ public class TestControllerContato {
     private Long idInexistente;
     
     private Contato contatoExistente;
+    private Contato contatoNovo;
     
 	@Autowired
 	private MockMvc mockMvc;
@@ -34,14 +38,20 @@ public class TestControllerContato {
 	@MockBean
 	private ContatoService service;
 	
+	@Autowired
+	ObjectMapper objectMapper;
+	
 	@BeforeEach
 	void setup() {
 		idExistente= 1L;
 		idInexistente = 2L;
+		
+		contatoNovo = new Contato();
 		contatoExistente = new Contato(idExistente, "maria", "maria@gmail");
 		
 		Mockito.when(service.pesquisar(idExistente)).thenReturn(contatoExistente);
 		Mockito.when(service.pesquisar(idInexistente)).thenThrow(EntityNotFoundException.class);
+		Mockito.when(service.salvar(any())).thenReturn(contatoExistente);
 	}
 
 	@Test
@@ -53,9 +63,21 @@ public class TestControllerContato {
 	
 	@Test
 	void deveRertornarStatus404QuandoPesquisaIdInexistente() throws Exception {
-		ResultActions result =	mockMvc.perform(get("/contato/{idcontato}", idInexistente)
+		ResultActions obj =	mockMvc.perform(get("/contato/{idcontato}", idInexistente)
 			                           .accept(MediaType.APPLICATION_JSON));
 		
-		    result.andExpect(status().isNotFound());
+		    obj.andExpect(status().isNotFound());		    
+	}
+	
+	@Test
+	void deveRetornarStatu201QuandoContatoSalvoComSucesso() throws Exception {
+		String jsonBody = objectMapper.writeValueAsString(contatoNovo);
+		ResultActions result = mockMvc.perform(post("/contato")
+			   .content(jsonBody)
+			   .contentType(MediaType.APPLICATION_JSON)
+			   .accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isCreated());
+				
 	}
 }
