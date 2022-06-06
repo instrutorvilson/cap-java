@@ -2,6 +2,7 @@ package com.aulas.rest;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -55,6 +56,8 @@ public class TestControllerContato {
 		Mockito.when(service.salvar(any())).thenReturn(contatoExistente);
 		Mockito.when(service.alterar(eq(idExistente), any())).thenReturn(contatoExistente);
 		Mockito.when(service.alterar(eq(idInexistente), any())).thenThrow(EntityNotFoundException.class);
+		Mockito.doNothing().when(service).excluir(idExistente);
+		Mockito.doThrow(EntityNotFoundException.class).when(service).excluir(idInexistente);
 	}
 
 	@Test
@@ -103,5 +106,13 @@ public class TestControllerContato {
 			   .accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNotFound());		       
+	}
+	
+	@Test
+	void deveRetornarNadaQuandoExcluirContatoExistente() throws Exception {
+		 ResultActions result = mockMvc.perform(delete("/contato/{idcontato}", idExistente)
+			 			               .accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNoContent());		       
 	}
 }

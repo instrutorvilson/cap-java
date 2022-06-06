@@ -1,5 +1,6 @@
 package com.aulas.rest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -74,6 +75,7 @@ public class ContatoTestIntegracao {
 	
 	@Test
 	void deveRetornarStatus200QuandoAlterarContatoExistenteComSucessoIt() throws Exception {
+		contatoNovo.setNome("Josefa");
 		String jsonBody = objectMapper.writeValueAsString(contatoExistente);
 		ResultActions result = mockMvc.perform(put("/contato/{idcontato}", idExistente)
 			   .content(jsonBody)
@@ -85,11 +87,28 @@ public class ContatoTestIntegracao {
 	
 	@Test
 	void deveRetornarStatus404QuandoAlterarContatoInexistenteIt() throws Exception {
+		contatoNovo.setNome("Josefa");
 		String jsonBody = objectMapper.writeValueAsString(contatoNovo);
 		ResultActions result = mockMvc.perform(put("/contato/{idcontato}", idInexistente)
 			   .content(jsonBody)
 			   .contentType(MediaType.APPLICATION_JSON)
 			   .accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNotFound());		       
+	}
+	
+	@Test
+	void deveRetornarNadaQuandoExcluirContatoExistenteIt() throws Exception {
+		 ResultActions result = mockMvc.perform(delete("/contato/{idcontato}", idExistente)
+			 			               .accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNoContent());		       
+	}
+	
+	@Test
+	void deveRetornar404QuandoExcluirContatoInexistenteIt() throws Exception {
+		 ResultActions result = mockMvc.perform(delete("/contato/{idcontato}", idExistente)
+			 			               .accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNotFound());		       
 	}

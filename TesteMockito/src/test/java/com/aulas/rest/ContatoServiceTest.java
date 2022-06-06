@@ -56,7 +56,7 @@ public class ContatoServiceTest {
 	@Test
 	void naoFazNadaQuandoDeletaIdExistente() {
 		Assertions.assertDoesNotThrow(() -> {
-			service.delete(idExistente);
+			service.excluir(idExistente);
 		});
 	   Mockito.verify(repository, Mockito.times(1)).deleteById(idExistente);	
 	}
@@ -64,7 +64,7 @@ public class ContatoServiceTest {
 	@Test
 	void levantaEntityNotFoundExceptionQuandoDeleteIdInexistente() {
 		Assertions.assertThrows(EntityNotFoundException.class, () ->{
-			service.delete(idInexistente);
+			service.excluir(idInexistente);
 		});
 		Mockito.verify(repository, Mockito.times(1)).deleteById(idInexistente);		
 	}
