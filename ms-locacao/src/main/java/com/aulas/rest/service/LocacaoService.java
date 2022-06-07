@@ -1,6 +1,9 @@
 package com.aulas.rest.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +27,12 @@ public class LocacaoService {
    public Locacao save(Locacao locacao) {
 	   localFeignClient.reservar(locacao.getLocal(), true);
 	   return repository.save(locacao);
+   }
+   
+   public void cancelar(Long idlocacao) {
+	   Optional<Locacao> obj = repository.findById(idlocacao);
+	   Locacao locacao = obj.orElseThrow(() -> new EntityNotFoundException("Locação não encontrada"));
+	   localFeignClient.reservar(locacao.getLocal(), false);
+	   repository.delete(locacao);
    }
 }
