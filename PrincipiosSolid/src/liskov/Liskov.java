@@ -10,7 +10,7 @@ public class Liskov {
         zoo(gato);
         
 		Gato g1 = new Gato();
-		zoo(g1);
+		zoo(g1);		
 	}
 	
 	public static void zoo(Animal animal) {
